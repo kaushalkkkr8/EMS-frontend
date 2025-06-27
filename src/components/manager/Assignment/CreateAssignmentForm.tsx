@@ -3,22 +3,28 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAssignment } from '@/context/AssignmentContext';
 import { useEngineer } from '@/context/EngineerContext';
 import { useProject } from '@/context/ProjectContext';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { AssignmentForm } from './type';
 
 export default function CreateAssignmentForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<AssignmentForm>();
-  const { createAssignment } = useAssignment();
+
+  const { createAssignment, assignments, getAssignments } = useAssignment();
   const { engineers, fetchEngineers } = useEngineer();
   const { projects, getProjects } = useProject();
 
   useEffect(() => {
     fetchEngineers();
     getProjects();
+    getAssignments();
   }, []);
+
+  // Filter out projects that already have an assignment
+  const assignedProjectIds = assignments.map(a => a.projectId);
+  const unassignedProjects = projects.filter(p => !assignedProjectIds.includes(p._id));
 
   const onSubmit = async (data: AssignmentForm) => {
     try {
@@ -34,7 +40,7 @@ export default function CreateAssignmentForm() {
   };
 
   return (
-     <Card className="w-full max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl">
+    <Card className="w-full max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl">
       <CardHeader>
         <CardTitle className="text-2xl">Create Assignment</CardTitle>
       </CardHeader>
@@ -63,7 +69,7 @@ export default function CreateAssignmentForm() {
               className="w-full h-10 border px-3 py-2 rounded-md"
             >
               <option value="">Select Project</option>
-              {projects?.map(p => (
+              {unassignedProjects.map(p => (
                 <option key={p._id} value={p._id}>{p.name}</option>
               ))}
             </select>

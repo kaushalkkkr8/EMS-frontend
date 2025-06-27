@@ -29,7 +29,7 @@ export default function EngineerDashboard() {
         backgroundImage: `url(${dashBg})`
       }}>
       {/* ✅ Sidebar */}
-      <div className="w-64 bg-white border-r px-4 py-6 space-y-8 shadow-sm">
+      <div className="w-64  border-r px-4 py-6 space-y-8 shadow-sm">
         {/* User Info */}
         <div className="flex items-center gap-3">
           <Avatar>
@@ -46,6 +46,10 @@ export default function EngineerDashboard() {
             {/* <p className="text-xs text-muted-foreground">{userData?.email}</p> */}
           </div>
         </div>
+
+        <div className="px-3 py-2   text-center ">
+            <h1 className="text-base font-semibold text-gray-700">👔 Engineer Panel</h1>
+          </div>
 
         {/* Navigation */}
         <div className="space-y-2 text-sm font-medium">
