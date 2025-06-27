@@ -1,17 +1,14 @@
 // src/pages/EngineerDashboard.tsx
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import {  useState } from 'react';
 import MyAssignments from '@/components/engineer/Assignment/MyAssignments';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ProfileCard from '@/components/engineer/Engineer/ProfileCard';
 import {
-  LayoutDashboard,
   ClipboardList,
   User,
   LogOut,
 } from 'lucide-react'; // Add more icons if needed
-import { Badge } from '@/components/ui/badge';
 
 // Define User type if not already imported
 type User = {
