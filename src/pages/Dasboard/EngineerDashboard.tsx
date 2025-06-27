@@ -9,6 +9,7 @@ import {
   User,
   LogOut,
 } from 'lucide-react'; // Add more icons if needed
+import dashBg from '@/assets/dasbd.jpg'
 
 // Define User type if not already imported
 type User = {
@@ -24,7 +25,9 @@ export default function EngineerDashboard() {
   
 
    return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen" style={{
+        backgroundImage: `url(${dashBg})`
+      }}>
       {/* ✅ Sidebar */}
       <div className="w-64 bg-white border-r px-4 py-6 space-y-8 shadow-sm">
         {/* User Info */}

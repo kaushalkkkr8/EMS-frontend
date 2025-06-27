@@ -33,7 +33,7 @@ export default function ProjectForm() {
   };
 
   return (
-   <Card className="w-full max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl">
+    <Card className="w-full max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl">
       <CardHeader>
         <CardTitle className="text-2xl">Project Management</CardTitle>
       </CardHeader>

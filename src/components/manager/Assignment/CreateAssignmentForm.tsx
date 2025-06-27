@@ -47,7 +47,7 @@ export default function CreateAssignmentForm() {
               {...register('engineerId', { required: true })}
               className="w-full h-10 border px-3 py-2 rounded-md"
             >
-              <option value="">Select Engineer</option>
+              <option value="">Select Engineer Lead</option>
               {engineers?.map(e => (
                 <option key={e._id} value={e._id}>{e.name}</option>
               ))}

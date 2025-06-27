@@ -17,6 +17,7 @@ type AssignmentContextType = {
   assignments: Assignment[];
   createAssignment: (data: Assignment) => Promise<void>;
   getAssignments: () => Promise<void>;
+  deleteAssignment: (id: string) => Promise<void>;
 };
 
 const AssignmentContext = createContext<AssignmentContextType | undefined>(undefined);
@@ -60,6 +61,8 @@ export const AssignmentProvider = ({ children }: { children: ReactNode }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log({res});
+      
 
       setAssignments(res.data); // assuming backend returns array
     } catch (err) {
@@ -67,8 +70,31 @@ export const AssignmentProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const deleteAssignment = async (id: string) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+      throw new Error('Authentication token missing');
+    }
+
+    await api.delete(`/assignments/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Optionally update local state
+    setAssignments((prev) => prev.filter((a: any) => (a as any)._id !== id));
+  } catch (err) {
+    console.error('Failed to delete assignment:', err);
+    throw err;
+  }
+};
+
+
   return (
-    <AssignmentContext.Provider value={{ assignments, createAssignment, getAssignments }}>
+    <AssignmentContext.Provider value={{ assignments, createAssignment, getAssignments,deleteAssignment }}>
       {children}
     </AssignmentContext.Provider>
   );
