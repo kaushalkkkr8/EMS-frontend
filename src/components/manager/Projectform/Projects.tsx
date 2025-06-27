@@ -111,7 +111,7 @@ export default function AllProjects() {
                       className="bg-blue-500 hover:bg-blue-600 text-white"
                       onClick={() => {
                         setEditMode(true);
-                        setProjectToEdit(project); // ✅ correctly typed
+                        setProjectToEdit(project); 
                       }}
                     >
                       Edit

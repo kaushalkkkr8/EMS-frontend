@@ -37,7 +37,7 @@ export default function EditProjectForm({ project, onCancel, onSave }: Props) {
           requiredSkills: '',
           teamSize: 1,
           status: 'planning',
-          _id: '', // required to satisfy `Project` type
+          _id: '',
         },
   });
 
@@ -85,21 +85,21 @@ export default function EditProjectForm({ project, onCancel, onSave }: Props) {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Project Name */}
+          
           <div>
             <Label>Project Name</Label>
             <Input {...register('name', { required: true, minLength: 3 })} />
             {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
           </div>
 
-          {/* Description */}
+         
           <div>
             <Label>Description</Label>
             <Input {...register('description', { required: true })} />
             {errors.description && <p className="text-red-500 text-sm">Required</p>}
           </div>
 
-          {/* Dates */}
+   
           <div className="flex gap-4">
             <div className="flex-1">
               <Label>Start Date</Label>
@@ -113,7 +113,6 @@ export default function EditProjectForm({ project, onCancel, onSave }: Props) {
             </div>
           </div>
 
-          {/* Skills */}
           <div>
             <Label>Skills (comma separated)</Label>
             <Input
@@ -122,7 +121,7 @@ export default function EditProjectForm({ project, onCancel, onSave }: Props) {
             />
           </div>
 
-          {/* Team Size & Status */}
+      
           <div className="flex gap-4">
             <div className="flex-1">
               <Label>Team Size</Label>
@@ -146,10 +145,10 @@ export default function EditProjectForm({ project, onCancel, onSave }: Props) {
             </div>
           </div>
 
-          {/* Buttons */}
+         
           <div className="flex gap-4">
             <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">
-              {project ? 'Update Project' : 'Create Project'}
+               Update Project
             </Button>
             <Button type="button" onClick={onCancel} variant="outline" className="w-full">
               Cancel

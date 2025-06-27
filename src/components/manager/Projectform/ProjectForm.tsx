@@ -6,13 +6,16 @@ import { Label } from '@/components/ui/label';
 import type { Project } from '@/context/ProjectContext';
 import { useProject } from '@/context/ProjectContext';
 
+import { useState } from 'react';
+import AllProjects from './Projects';
+
 export default function ProjectForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Project>();
-
+ const [projectCreated, setProjectCreated] = useState(false);
   const { createProject } = useProject();
 
   const onSubmit = async (data: any) => {
@@ -27,11 +30,12 @@ export default function ProjectForm() {
 
       await createProject(payload);
       alert('Project created successfully!');
+       setProjectCreated(true);
     } catch (err: any) {
       alert(err?.response?.data?.message || 'Project creation failed.');
     }
   };
-
+ if (projectCreated) return <AllProjects />
   return (
     <Card className="w-full max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl">
       <CardHeader>

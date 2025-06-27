@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,7 @@ import { useAssignment } from '@/context/AssignmentContext';
 import { useEngineer } from '@/context/EngineerContext';
 import { useProject } from '@/context/ProjectContext';
 import type { AssignmentForm } from './type';
+import Assignment from './Assignments';
 
 export default function CreateAssignmentForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<AssignmentForm>();
@@ -15,6 +16,7 @@ export default function CreateAssignmentForm() {
   const { createAssignment, assignments, getAssignments } = useAssignment();
   const { engineers, fetchEngineers } = useEngineer();
   const { projects, getProjects } = useProject();
+   const [assignmentCreated, setAssignmentCreated] = useState(false);
 
   useEffect(() => {
     fetchEngineers();
@@ -33,11 +35,13 @@ export default function CreateAssignmentForm() {
         allocationPercentage: Number(data.allocationPercentage),
       });
       alert('Assignment Created Successfully');
+      setAssignmentCreated(true)
     } catch (error) {
       console.error('Assignment creation failed:', error);
       alert('Failed to create assignment');
     }
   };
+   if (assignmentCreated) return <Assignment />
 
   return (
     <Card className="w-full max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl">
